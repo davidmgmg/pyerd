@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>{{ erd_name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{  url_for('static', filename='styles/erd-style.css')}}">
 </head>
 <body>
+    <button type="button" class="btn btn-primary" onclick="window.location.href='/'">Back</button>
 
     <h1>{{ erd_name }}</h1>
     <button class="add-btn" id="add-table-btn">Add Table</button>
@@ -17,6 +19,10 @@
     </div>
     
 </body>
+<script src="{{ url_for('static', filename='bootstrap/jquery-3.2.1.slim.min.js') }}"></script>
+<script src="{{ url_for('static', filename='bootstrap/popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='bootstrap/bootstrap.min.js') }}"></script>
+
 
 <!-- erd logics -->
 <script src="{{ url_for('static', filename='konva.min.js') }}"></script>
@@ -181,4 +187,5 @@ layer.draw();
     }
 
 </script>
+
 </html>

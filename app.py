@@ -27,6 +27,26 @@ def index():
 
 
 
+@app.route('/read/<erd>')
+def read_erd(erd):
+    file_path = os.path.join(SAVE_FOLDER, f"{erd}.json")
+    with open(file_path, 'r', encoding="utf-8") as f:
+        erd_data = json.load(f)
+    return render_template('show_erd.html', erd_name=erd_data.get("name", "???") ,erd_data=json.dumps(erd_data))
+
+
+
+@app.route('/delete/<erd>', methods=["POST"])
+def delete_erd(erd):
+    file_path = os.path.join(SAVE_FOLDER, f"{erd}.json")
+    if os.path.exists(file_path):
+        os.remove(file_path)
+        return redirect(url_for('index'))
+    else:
+        return "ERD not found", 404
+
+
+
 @app.route('/create-erd', methods=['POST'])
 def create_erd():
     erd_name = request.form.get('name')
@@ -46,14 +66,12 @@ def create_erd():
 
 
 
-@app.route('/read/<erd>')
-def read_erd(erd):
-    file_path = os.path.join(SAVE_FOLDER, f"{erd}.json")
-    with open(file_path, 'r', encoding="utf-8") as f:
-        erd_data = json.load(f)
-    return render_template('show_erd.html', erd_name=erd_data.get("name", "???") ,erd_data=json.dumps(erd_data))
 
 
+
+
+
+# edit er diagram
 
 @app.route('/create/text/<erd_name>', methods=['POST'])
 def create_text(erd_name):
